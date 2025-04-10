@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>GCS 업로드 테스트</title>
+</head>
+<body>
+<h2>이미지 업로드 테스트</h2>
+<form id="uploadForm">
+    <input type="file" id="fileInput" name="file" accept="image/*" />
+    <button type="submit">업로드</button>
+</form>
+<p id="result"></p>
+
+<script>
+    const form = document.getElementById("uploadForm");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("file", document.getElementById("fileInput").files[0]);
+
+        const response = await fetch("http://localhost:8080/api/upload", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.text();
+        document.getElementById("result").innerText = result;
+    });
+</script>
+</body>
+</html>

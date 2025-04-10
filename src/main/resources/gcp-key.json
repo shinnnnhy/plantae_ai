@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "genial-broker-455502-i8",
+  "private_key_id": "c2378686ed3b9241c0b1c306e9cdd24c9136397e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCctpFv0E2qhW+H\ny4uZRimsNqaakdqwQkAlhyKaSot7Y0wciq5I96oPsiSkfbH0X4ktKNPbnYfaDYG5\n0dw4YOAGRbgBxXkzidEuZsLoVJ1JeKzPJKSUyOa+Y6oz3OoA7HMXzNjI2rLaOQuF\nZv8fZBcH5s+riwDlU6wNomEiko54lPH3gdK128BFLXjAAEG7YfjGdR0XQd6xOYLw\nruIxyrsuvNjOVa5Bux97y/oTq7RNMc9Mqq/dbSPI45o+2jG1GoGSrcm/glvUjqps\nRCps2iICnXb3UJFoNmQsOucNobe7QLJaThL/FcAhpkYNijwaJd6NMWVEvAA9tcz4\nAekAOT1vAgMBAAECggEAIvgaO/kfW42q9YJWBD3DzsnjI1qokew2pCkjb4py1XWy\n5iuL+HxLVnVJ9+qUaxNmaM1TeQ4N4nphGDXcDjiPxNaJ2NtX0EhQhSopE+7Nqjdj\nWFW04/5wfst+j1QcY1hf1k+/kBI9FrTj/UCebULIYNsAPCcobAPfwKsbQbuyTvWT\n0e/Cg4nKTEuoe1BeRWvv0C/4oz8dlfy61mlEyUpy52k60VDt9kwXUNeTIcKPkgzy\n8pOyxqF3tSWGeAevl7jGx8PzPw8FxVOJY/Sb10SKUN/bJxY8AtUFQeyR51ONIGxo\nqs17I16GwevZ5LAhESHpVnkMC5AblfepgvkDLZXBAQKBgQDaGPQCXAVYvdDvqQtB\nk6oKM2Tu+yzyeFUhjLwZfSJZVAXlsixBqmyqv+vX+dqGnPLC7HwUzCcyYAtdjgvs\nlTVvMQYKwwu3UCaPf4ttW26Q2q0kpWQCLN/9cj+rM5u+P4t0i2uXo2KlcbR32gqv\n0kKLV1/CcRpGKB7NwopWtnP+ZQKBgQC38qhYIrmX4JrpUVckvsl8XdmwS0fiVHCw\nmac+k+ag12vY4JPevYCiKWi/EQjkgUCkMQLRgPQvwNcxh6pJDmIEXhs6u3GEOyQQ\n/Y/ZbdenMCnPHhVl5nPy7cP9Uuz4A2ItKB//Q7kWwhrFgk62RZhbvwUgyQ5GlPkJ\nYswM2dv1QwKBgHB/gJYa+1MMDlMhAkJgNcyvN/ghrcygj2EP5BLNvkMPmT8jSbrR\net4Uw0WThsn6+SncrCBaMjnE2vf2BmaRjI9/XRt+AnQbLtjENJpDGGQ1uCv39/87\nQIrOPNNFeqeGxZtnMydzyrWGUk2kNfD9Zv/TIPz+NExN8521JICX+nsVAoGBAJtV\n6EFdOZr+yfKDhPJ7xowmeME+ITsIkY0ghDH9FcH3iJRBub1cC/dkvpay3O6SE7NT\nzAx9ODfnQhIKfYtqAO2tRpNHXOoMQz2x0jsLXhRKQNQtlGZTwNCBZoNS9tfNi6eU\nfcjDONb2HUNy8eNMTAgV/E+eWVbTUKZTbvrfMrcfAoGAe/IOeCzEYHic17HWnB7b\nOjuEcBMk4+NWT/QcGhTkV+lgiP0nZVrYGLd2AAc6ZW0RiPvjoTl93c8dtDhW91gK\nAooOpAHIWvQ9vbTvqNndu5wGXMha+xESYAVc7sRqFZ96TGViV+G1cyM9j1oidRYu\nQV9H9PaVOLjDNMRinp07C4I=\n-----END PRIVATE KEY-----\n",
+  "client_email": "plant-storage-access@genial-broker-455502-i8.iam.gserviceaccount.com",
+  "client_id": "105350962872391383408",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/plant-storage-access%40genial-broker-455502-i8.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

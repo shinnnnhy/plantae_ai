@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 후 이미지 업로드</title>
+</head>
+<body>
+<h1>1. 로그인</h1>
+<form id="login-form">
+    <label>이메일:</label>
+    <input type="text" id="email" /><br /><br />
+    <label>비밀번호:</label>
+    <input type="password" id="password" /><br /><br />
+    <button type="submit">로그인</button>
+</form>
+<p id="login-response"></p>
+
+<hr>
+
+<h1>2. 이미지 업로드</h1>
+<form id="upload-form">
+    <input type="file" id="fileInput" name="file" accept="image/*" />
+    <button type="submit">이미지 업로드</button>
+</form>
+<p id="upload-result"></p>
+
+<script>
+    // 1. 로그인 처리
+    document.getElementById("login-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const res = await fetch("http://localhost:8080/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+            localStorage.setItem("jwt", data.token); // ✅ 토큰 저장
+            document.getElementById("login-response").innerText = "로그인 성공. JWT 토큰 저장됨.";
+            console.log("토큰:", data.token);
+        } else {
+            document.getElementById("login-response").innerText = "로그인 실패: " + (data.message || "오류 발생");
+        }
+    });
+
+    // 2. 이미지 업로드 처리
+    document.getElementById("upload-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const file = document.getElementById("fileInput").files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const token = localStorage.getItem("jwt"); // ✅ 저장된 토큰 가져오기
+        if (!token) {
+            alert("먼저 로그인을 해주세요.");
+            return;
+        }
+
+        const response = await fetch("http://localhost:8080/api/upload", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            body: formData
+        });
+
+        const result = await response.text();
+        document.getElementById("upload-result").innerText = result;
+    });
+</script>
+</body>
+</html>
