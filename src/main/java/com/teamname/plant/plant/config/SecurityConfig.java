@@ -25,7 +25,7 @@ public class SecurityConfig {
                                 "/api/upload",
                                 "/upload_test.html",
                                 "/register_test.html",
-                                "/uplog_test.html",
+                                "/integration.html",
                                 "/login_test.html",
                                 "/css/**",
                                 "/js/**",

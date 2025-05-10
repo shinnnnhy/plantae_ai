@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>로그인 및 이미지 업로드 테스트</title>
+    <title>식물 이미지 관리</title>
 </head>
 <body>
 <h1>1. 로그인</h1>
@@ -19,19 +19,35 @@
 
 <h1>2. 이미지 업로드</h1>
 <form id="upload-form">
+    <label for="cropType">작물 선택:</label>
+    <select id="cropType" name="cropType">
+        <option value="감자">감자</option>
+        <option value="고추">고추</option>
+        <option value="상추">상추</option>
+        <option value="배추">배추</option>
+        <option value="딸기">딸기</option>
+    </select><br /><br />
+
     <input type="file" id="fileInput" name="file" accept="image/*" />
     <button type="submit">이미지 업로드</button>
 </form>
+
 <p id="upload-result"></p>
 
 <hr>
 
-<h1>3. 업로드한 이미지 목록 조회</h1>
+<h1>3. 업로드한 이미지 목록 조회 및 삭제</h1>
 <button id="fetch-images">내 이미지 목록 불러오기</button>
 <ul id="image-list"></ul>
 
+<hr>
+
+<h1>4. 전체 이미지 목록 조회 (관리자 전용)</h1>
+<button id="fetch-admin-images">전체 이미지 목록 보기</button>
+<ul id="admin-image-list"></ul>
+
 <script>
-    // 로그인 처리
+    // 로그인
     document.getElementById("login-form").addEventListener("submit", async function (e) {
         e.preventDefault();
         const email = document.getElementById("email").value;
@@ -52,12 +68,14 @@
         }
     });
 
-    // 이미지 업로드 처리
     document.getElementById("upload-form").addEventListener("submit", async function (e) {
         e.preventDefault();
         const file = document.getElementById("fileInput").files[0];
+        const cropType = document.getElementById("cropType").value;
+
         const formData = new FormData();
         formData.append("file", file);
+        formData.append("cropType", cropType); // ✅ 여기에 정확히 위치해야 함
 
         const token = localStorage.getItem("jwt");
         if (!token) {
@@ -77,7 +95,8 @@
         document.getElementById("upload-result").innerText = result;
     });
 
-    // 이미지 목록 조회
+
+    // 이미지 조회
     document.getElementById("fetch-images").addEventListener("click", async function () {
         const token = localStorage.getItem("jwt");
         if (!token) {
@@ -100,15 +119,77 @@
             data.forEach(image => {
                 const li = document.createElement("li");
                 li.innerHTML = `
-    <div>
-        <img src="${image.imageUrl}" alt="uploaded image" width="200" />
-        <p>${image.uploadedAt}</p>
-    </div>
-`;
+                    <div>
+                        <img src="${image.imageUrl}" alt="uploaded image" width="200" />
+                        <p>업로드 시간: ${image.uploadedAt}</p>
+                        <button onclick="deleteImage('${image.id}')">삭제</button>
+                    </div>
+                `;
                 list.appendChild(li);
             });
         } else {
             list.innerHTML = "<li>이미지 데이터를 불러올 수 없습니다.</li>";
+        }
+    });
+
+    // 이미지 삭제
+    async function deleteImage(imageId) {
+        const token = localStorage.getItem("jwt");
+        if (!token) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+
+        const confirmed = confirm("정말 이 이미지를 삭제하시겠습니까?");
+        if (!confirmed) return;
+
+        const res = await fetch(`http://localhost:8080/api/images/${imageId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        const message = await res.text();
+        alert(message);
+        document.getElementById("fetch-images").click(); // 목록 새로고침
+    }
+    document.getElementById("fetch-admin-images").addEventListener("click", async function () {
+        const token = localStorage.getItem("jwt");
+        if (!token) {
+            alert("먼저 로그인을 해주세요.");
+            return;
+        }
+
+        const res = await fetch("http://localhost:8080/api/admin/images", {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        const list = document.getElementById("admin-image-list");
+        list.innerHTML = "";
+
+        if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data)) {
+                data.forEach(image => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                    <div>
+                        <img src="${image.imageUrl}" width="200" />
+                        <p>업로드 시간: ${image.uploadedAt}</p>
+                        <p>사용자 ID: ${image.userId}</p>
+                    </div>
+                `;
+                    list.appendChild(li);
+                });
+            } else {
+                list.innerHTML = "<li>이미지 데이터 형식 오류</li>";
+            }
+        } else {
+            list.innerHTML = "<li>접근이 거부되었습니다.</li>";
         }
     });
 </script>

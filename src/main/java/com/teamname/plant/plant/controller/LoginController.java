@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/api")
 public class LoginController {
@@ -47,3 +46,5 @@ public class LoginController {
         return ResponseEntity.ok(response);
     }
 }
+
+

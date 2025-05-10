@@ -11,47 +11,34 @@ public class PlantImage {
     @Id
     private String id;
 
-    private String userId;          // 사용자 계정 식별자
-    private String imageUrl;        // GCS에 업로드된 이미지 URL
+    private String userId;
+    private String imageUrl;
     private LocalDateTime uploadedAt;
+    private String cropType;
 
     public PlantImage() {}
 
-    public PlantImage(String userId, String imageUrl, LocalDateTime uploadedAt) {
+    public PlantImage(String userId, String imageUrl, LocalDateTime uploadedAt, String cropType) {
         this.userId = userId;
         this.imageUrl = imageUrl;
         this.uploadedAt = uploadedAt;
+        this.cropType = cropType;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public String getUserId() {
-        return userId;
-    }
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-    public LocalDateTime getUploadedAt() {
-        return uploadedAt;
-    }
+    public LocalDateTime getUploadedAt() { return uploadedAt; }
+    public void setUploadedAt(LocalDateTime uploadedAt) { this.uploadedAt = uploadedAt; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public void setUploadedAt(LocalDateTime uploadedAt) {
-        this.uploadedAt = uploadedAt;
-    }
+    public String getCropType() { return cropType; }
+    public void setCropType(String cropType) { this.cropType = cropType; }
 }
+
+

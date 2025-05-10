@@ -40,4 +40,12 @@ public class GCSUploadService {
     public List<PlantImage> getImagesByUserId(String userId) {
         return plantImageRepository.findByUserId(userId);
     }
+    public void deleteFileFromGCS(String imageUrl) {
+        String bucketName = "plant-image-bucket";
+        String fileName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+
+        BlobId blobId = BlobId.of(bucketName, fileName);
+        storage.delete(blobId);  // 실패 시 false 리턴됨 (예외 아님)
+    }
+
 }
